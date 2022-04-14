@@ -3,6 +3,7 @@ from torch.utils.data import Dataset, DataLoader, TensorDataset, ConcatDataset, 
 from numpy.random import seed
 import numpy as np
 import random
+import os
 
 SEED = 123
 seed(SEED)
@@ -37,10 +38,13 @@ class My_Dataset(object):
             sub_tokens= self.tokenizer.tokenize(raw_token)
             for jx, sub_token in enumerate(sub_tokens):
                 split_tokens.append(sub_token)
+                # try:
                 if ae_labels[ix]==1 and jx>0:
                     split_ae_labels.append(self.ont_hot_map[2])
                 else:
                     split_ae_labels.append(self.ont_hot_map[ae_labels[ix]])
+                # except:
+                #     print(1)
 
                 if oe_labels[ix]==1 and jx>0:
                     split_oe_labels.append(self.ont_hot_map[2])
@@ -180,12 +184,13 @@ def get_loader(corpus, data_ratio, remain_pesudo_data_ratio, add_other_corpus, b
                     addedd_corpus =  "lap15"
                 else:
                     raise Exception()
-                pesu_train_dev_test_list = ['data/{}/train/'.format(corpus), 'data/{}/dev/'.format(corpus), 'data/{}/test/'.format(corpus)]
+                pesu_train_dev_test_list = ['data/{}/train/'.format(addedd_corpus), 'data/{}/dev/'.format(addedd_corpus), 'data/{}/test/'.format(addedd_corpus)]
                 for fname1 in pesu_train_dev_test_list:
-                    remain_sent_data.extend(open(fname1 + r'sentence.txt', 'r', encoding='utf-8').readlines())
-                    remain_ae_data.extend(open(fname1 + r'target.txt', 'r', encoding='utf-8').readlines())
-                    remain_oe_data.extend(open(fname1 + r'opinion.txt', 'r', encoding='utf-8').readlines())
-                    remain_sc_data.extend(open(fname1 + r'target_polarity.txt', 'r', encoding='utf-8').readlines())
+                    if os.path.exists(fname1):
+                        remain_sent_data.extend(open(fname1 + r'sentence.txt', 'r', encoding='utf-8').readlines())
+                        remain_ae_data.extend(open(fname1 + r'target.txt', 'r', encoding='utf-8').readlines())
+                        remain_oe_data.extend(open(fname1 + r'opinion.txt', 'r', encoding='utf-8').readlines())
+                        remain_sc_data.extend(open(fname1 + r'target_polarity.txt', 'r', encoding='utf-8').readlines())
         else:       
             is_testing = True
             need_sent_data, need_ae_data, need_oe_data, need_sc_data = sent_data, ae_data, oe_data, sc_data   

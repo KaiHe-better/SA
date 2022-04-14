@@ -32,3 +32,6 @@ srun -p NV100q  -w node24 nohup bash temp_run.sh >/dev/null 2>&1 &
 
 
 srun -p PA40q  -w node01 nohup python run.py --ID no_weig --GPU 1 --corpus res14 >/dev/null 2>&1 &
+
+
+srun -p PV1003q  -w node14 nohup python run.py --ID all_lap14 --GPU 0 --corpus lap14 --data_ratio 1 --if_weight_loss --batch_size 8 --uncertain_th_S 0.3 --uncertain_th_E 0.8 --chosed_th 0.7 --add_other_corpus  >/dev/null 2>&1 &   

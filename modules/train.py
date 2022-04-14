@@ -2,7 +2,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--ID', default='0', type=str, help='ID')
 parser.add_argument('--GPU', default='3', type=str, help='GPU')
-parser.add_argument('--corpus', default='res14', type=str, choices=['res14', 'lap14', 'res15'], help='corpus')
+parser.add_argument('--corpus', default='lap14', type=str, choices=['res14', 'lap14', 'res15'], help='corpus')
 parser.add_argument('--batch_size', default=64, type=int, help='number of example per batch :  64')
 parser.add_argument('--optim', default='adamw', help='sgd / adam / adamw')
 parser.add_argument('--max_len', default=100, type=int, help='max_len')
@@ -32,7 +32,7 @@ parser.add_argument('--chosed_th', default=0.4, type=float, help='augment_num')
 parser.add_argument('--uncertain_th_S', default=0.2, type=float, help='augment_num')
 parser.add_argument('--uncertain_th_E', default=0.9, type=float, help='augment_num')
 
-parser.add_argument('--data_ratio', default=0.5, type=float, help='augment_num')
+parser.add_argument('--data_ratio', default=1, type=float, help='augment_num')
 parser.add_argument('--remain_pesudo_data_ratio', default=1, type=float, help='1 means 1-data_ratio unlabel data')
 parser.add_argument('--mix_loss_weight', default=0.5, type=float, help='augment_num')
 

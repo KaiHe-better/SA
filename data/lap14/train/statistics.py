@@ -110,7 +110,8 @@ sc_dic = dict(Counter(total_sc))
 # 1=positive, 2=negative, 3=neutral, 4=conflict.
 sum_sc_pos = sc_dic["1"]/len(total_tokens)
 sum_sc_neg = sc_dic["2"]/len(total_tokens)
-sum_sc_neu = sc_dic["0"]/len(total_tokens)
+sum_sc_neu = sc_dic["3"]/len(total_tokens)
+sum_sc_other = sc_dic["0"]/len(total_tokens)
 
 
 ae_token = round((ae_dic["1"]+ae_dic["2"]) /len(total_tokens)*100,2)
@@ -129,6 +130,6 @@ print("oe", round(sum_oe_B*100,2), round(sum_oe_I*100,2), round(sum_oe_O*100,2))
 print(round(round(sum_oe_B*100,2)+ round(sum_oe_I*100,2)+round(sum_oe_O*100,2),2))
 
 print("sc_dic", sc_dic)
-print("sc", round(sum_sc_pos*100,2), round(sum_sc_neg*100,2), round(sum_sc_neu*100,2))
-print(round(round(sum_sc_pos*100,2)+ round(sum_sc_neg*100,2)+round(sum_sc_neu*100,2),2))
+print("sc", round(sum_sc_pos*100,2), round(sum_sc_neg*100,2), round(sum_sc_neu*100,2), round(sum_sc_other*100,2))
+print(round(round(sum_sc_pos*100,2)+ round(sum_sc_neg*100,2)+round(sum_sc_neu*100,2)+round(sum_sc_other*100,2),2))
 
